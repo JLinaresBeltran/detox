@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://detoxsabeho.com</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://detoxsabeho.com/images/placeholders/kit-product.png</image:loc>
+      <image:title>Kit Detox Sabeho</image:title>
+      <image:caption>Protocolo de Reinicio Intestinal de 4 días</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://detoxsabeho.com/images/placeholders/logo.png</image:loc>
+      <image:title>Logo Detox Sabeho</image:title>
+      <image:caption>Marca Detox Sabeho</image:caption>
+    </image:image>
+  </url>
+</urlset>

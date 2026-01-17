@@ -1,0 +1,20 @@
+# robots.txt para Detox Sabeho
+User-agent: *
+Allow: /
+Disallow: /js/
+Disallow: /css/
+Disallow: /*.backup$
+
+# Sitemap
+Sitemap: https://detoxsabeho.com/sitemap.xml
+
+# Crawl-delay para bots específicos (opcional pero recomendado)
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+# Permitir Googlebot sin restricciones
+User-agent: Googlebot
+Allow: /

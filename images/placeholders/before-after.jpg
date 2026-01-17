@@ -1,0 +1,18 @@
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo -->
+  <rect width="800" height="400" fill="#FAF9F6"/>
+
+  <!-- División "Antes" -->
+  <rect width="400" height="400" fill="#FDF2F8"/>
+  <text x="200" y="200" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#BE185D" text-anchor="middle">ANTES</text>
+
+  <!-- División "Después" -->
+  <rect x="400" width="400" height="400" fill="#E0F2E9"/>
+  <text x="600" y="200" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#059669" text-anchor="middle">DESPUÉS</text>
+
+  <!-- Línea divisoria -->
+  <rect x="395" y="0" width="10" height="400" fill="#374151"/>
+
+  <!-- Texto inferior -->
+  <text x="400" y="350" font-family="Arial, sans-serif" font-size="18" fill="#374151" text-anchor="middle">Foto Antes y Después - Resultados</text>
+</svg>

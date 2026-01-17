@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Recupera tu abdomen plano en solo 4 días con el Protocolo de Reinicio Intestinal Detox Sabeho. Pago contra entrega en toda Colombia.">
+    <meta name="keywords" content="detox, desintoxicación, abdomen plano, protocolo intestinal, Colombia, pago contra entrega">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Detox Sabeho - Recupera tu abdomen plano en 4 días">
+    <meta property="og:description" content="Protocolo de Reinicio Intestinal que desinflama tu cuerpo y desbloquea tu metabolismo. Pago contra entrega.">
+    <meta property="og:type" content="product">
+    <meta property="og:image" content="images/placeholders/kit-product.jpg">
+
+    <title>Detox Sabeho - Recupera tu abdomen plano en 4 días</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- WhatsApp Floating Button -->
+   <!-- <a href="https://wa.me/57XXXXXXXXXX?text=Hola!%20Quiero%20pedir%20mi%20Kit%20Detox%20Sabeho%20con%20pago%20contra%20entrega"
+       class="whatsapp-float"
+       target="_blank"
+       aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a> -->
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="images/placeholders/logo.png" alt="Detox Sabeho Logo">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECCIÓN 1: HERO -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="text-green">DESINTOXICA TU CUERPO</span>
+                        <span class="text-orange">EN 4 DÍAS</span>
+                    </h1>
+                    <p class="hero-subtitle">No es falta de voluntad, es materia fecal y líquido retenido. Descubre el Protocolo de Reinicio Intestinal que desinflama tu cuerpo y desbloquea tu metabolismo.</p>
+
+                    <div class="hero-image">
+                        <img src="images/placeholders/kit-product.png" alt="Kit Detox Sabeho" loading="eager">
+                        <div class="hero-image-badge">
+                           <!-- <img src="images/placeholders/before-after.jpg" alt="Antes y Después - Resultados Detox" loading="eager"> -->
+                        </div>
+                    </div>
+
+                    <div class="hero-cta">
+                        <a href="#formulario" class="btn btn-primary">QUIERO DESINFLAMAR MI ABDOMEN</a>
+                        <!-- <span class="badge badge-trust">
+                            <i class="fas fa-shield-alt"></i>
+                            Pago Contra Entrega en toda Colombia 🇨🇴
+                        </span> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2: EL PROBLEMA -->
+    <section class="problem" id="problema">
+        <div class="container">
+            <div class="problem-content">
+                <h2 class="problem-question">¿Sientes que por más dieta que hagas, tu vientre sigue abultado y pesado?</h2>
+
+                <div class="problem-explanation">
+                    <div class="problem-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <p class="problem-text">
+                        A veces, el cuerpo acumula hasta <strong>5kg de materia fecal antigua</strong> y líquidos que las dietas normales no pueden eliminar. Esta es la verdadera causa de la pesadez, la falta de energía y esa ropa que ya no te queda como antes.
+                    </p>
+                </div>
+
+                <div class="problem-image">
+                    <img src="images/placeholders/woman-mirror.png" alt="Mujer frente al espejo frustrada" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3: LA SOLUCIÓN - EL PROTOCOLO SABEHO -->
+    <section class="solution" id="solucion">
+        <div class="container">
+            <div class="solution-header">
+                <h2 class="section-title">Más que un producto, un sistema de ingeniería para tu cuerpo</h2>
+                <p class="section-subtitle">El kit Sabeho: 4 componentes diseñados para reiniciar tu sistema digestivo</p>
+            </div>
+
+            <div class="solution-components">
+                <div class="component-card">
+                    <div class="component-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3 class="component-title">El Purgante</h3>
+                    <p class="component-description">El primer paso para desprender lo acumulado por años.</p>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3 class="component-title">Vinagre de Pitaya</h3>
+                    <p class="component-description">El motor natural para activar tu digestión.</p>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3 class="component-title">Fibra Digestiva</h3>
+                    <p class="component-description">El "barrido" mecánico que limpia las paredes intestinales.</p>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="component-title">3 Laxantes Magistrales</h3>
+                    <p class="component-description">La eliminación final, segura y controlada.</p>
+                </div>
+            </div>
+
+            <div class="solution-image">
+                <video
+                    id="unboxing-video"
+                    src="images/placeholders/unboxing-video.mp4"
+                    muted
+                    playsinline
+                    preload="auto"
+                    style="pointer-events: none;">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 4: CRONOGRAMA DE 4 DÍAS -->
+    <section class="timeline" id="cronograma">
+        <div class="container">
+            <h2 class="section-title slide-up scroll-animate">4 Días para una nueva versión de ti</h2>
+
+            <div class="timeline-wrapper">
+                <!-- Día 1 - Slide desde derecha -->
+                <div class="timeline-item slide-right" data-index="0">
+                    <div class="timeline-marker day-1">
+                        <span class="day-number">1</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">El Gran Reset</h3>
+                        <p class="timeline-label">Desprendimiento de Residuos Antiguos</p>
+                        <p class="timeline-description">Toma del Purgante Sabeho para remover toxinas y materia acumulada en el colon. Es el paso clave para "desbloquear" tu organismo.</p>
+                    </div>
+                </div>
+
+                <!-- Día 2 - Slide desde derecha -->
+                <div class="timeline-item slide-right" data-index="1">
+                    <div class="timeline-marker day-2">
+                        <span class="day-number">2</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Limpieza Profunda</h3>
+                        <p class="timeline-label">El Barrido Intestinal</p>
+                        <p class="timeline-description">Acción conjunta de Fibra y Pitaya para arrastrar los desechos removidos. Notarás una desinflamación real y eliminación de líquidos retenidos.</p>
+                    </div>
+                </div>
+
+                <!-- Día 3 - Slide desde derecha -->
+                <div class="timeline-item slide-right" data-index="2">
+                    <div class="timeline-marker day-3">
+                        <span class="day-number">3</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Estabilización</h3>
+                        <p class="timeline-label">Drenaje y Alivio de Pesadez</p>
+                        <p class="timeline-description">Los laxantes suaves evacúan los residuos finales sin la intensidad del día anterior. Verás tu abdomen notablemente más plano y desaparecerá la pesadez.</p>
+                    </div>
+                </div>
+
+                <!-- Día 4 - Slide desde derecha -->
+                <div class="timeline-item slide-right" data-index="3">
+                    <div class="timeline-marker day-4">
+                        <span class="day-number">4</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">El Resultado</h3>
+                        <p class="timeline-label">Ligereza Total y Energía Renovada</p>
+                        <p class="timeline-description">Sistema digestivo reiniciado y libre de toxinas. Te despertarás con una sensación de ligereza, mayor claridad mental y verás cómo tu ropa te queda mejor. ¡Tu transformación está completa!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-note">
+                <i class="fas fa-lightbulb"></i>
+                <p>Ideal para iniciar un <strong>fin de semana</strong> y disfrutar los resultados durante la semana</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 5: PRUEBA SOCIAL -->
+    <section class="testimonials" id="testimonios">
+        <div class="container">
+            <h2 class="section-title">Lo que dicen las mujeres que ya hicieron el "Reset"</h2>
+
+            <!-- Carousel de Testimonios -->
+            <div class="carousel">
+                <div class="carousel-container">
+                    <div class="carousel-track">
+                        <!-- Testimonio 1 -->
+                        <div class="carousel-slide">
+                            <div class="testimonial-card">
+                                <div class="testimonial-image">
+                                    <img src="images/placeholders/testimonio-1.jpg" alt="Resultado antes y después" loading="lazy">
+                                </div>
+                                <div class="testimonial-content">
+                                    <div class="testimonial-whatsapp">
+                                        <i class="fab fa-whatsapp"></i>
+                                        <p>"Me siento liviana por primera vez en años"</p>
+                                    </div>
+                                    <p class="testimonial-name">- María C.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonio 2 -->
+                        <div class="carousel-slide">
+                            <div class="testimonial-card">
+                                <div class="testimonial-image">
+                                    <img src="images/placeholders/testimonio-2.jpg" alt="Jean que vuelve a cerrar" loading="lazy">
+                                </div>
+                                <div class="testimonial-content">
+                                    <div class="testimonial-whatsapp">
+                                        <i class="fab fa-whatsapp"></i>
+                                        <p>"Por fin logré ir al baño sin esfuerzo"</p>
+                                    </div>
+                                    <p class="testimonial-name">- Andrea P.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonio 3 -->
+                        <div class="carousel-slide">
+                            <div class="testimonial-card">
+                                <div class="testimonial-image">
+                                    <img src="images/placeholders/testimonio-3.jpg" alt="Transformación abdomen" loading="lazy">
+                                </div>
+                                <div class="testimonial-content">
+                                    <div class="testimonial-whatsapp">
+                                        <i class="fab fa-whatsapp"></i>
+                                        <p>"Bajé 2 tallas de inflamación en 4 días"</p>
+                                    </div>
+                                    <p class="testimonial-name">- Carolina R.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carousel Controls -->
+                <button class="carousel-btn carousel-btn-prev" aria-label="Anterior">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn carousel-btn-next" aria-label="Siguiente">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+
+                <!-- Carousel Indicators -->
+                <div class="carousel-indicators">
+                    <button class="indicator active" data-slide="0" aria-label="Ir a testimonio 1"></button>
+                    <button class="indicator" data-slide="1" aria-label="Ir a testimonio 2"></button>
+                    <button class="indicator" data-slide="2" aria-label="Ir a testimonio 3"></button>
+                </div>
+            </div>
+
+            <div class="testimonials-cta">
+                <a href="#formulario" class="btn btn-primary">PEDIR MI KIT Y PAGAR EN CASA</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 6: SEGURIDAD Y RESPONSABILIDAD -->
+    <section class="safety" id="seguridad">
+        <div class="container">
+            <div class="safety-header">
+                <h2 class="section-title">Tu bienestar es lo primero: Uso Seguro y Responsable</h2>
+            </div>
+
+            <div class="safety-content">
+                <!-- Certificación INVIMA -->
+                <div class="safety-invima">
+                    <div class="invima-badge">
+                        <img src="images/placeholders/invima-badge.png" alt="Certificación INVIMA" class="invima-badge-img" loading="lazy">
+                        <h3>Calidad Garantizada y Certificada</h3>
+                    </div>
+                    <p class="invima-text">Producto con Registro Sanitario INVIMA</p>
+                    <p class="invima-number">No. RSAA21M-0007359</p>
+                    <div class="invima-seal">
+                        <img src="images/placeholders/invima-seal.png" alt="Sello INVIMA" loading="lazy">
+                    </div>
+                </div>
+
+                <!-- Contraindicaciones -->
+                <div class="safety-warnings">
+                    <h3 class="section-subtitle">Transparencia ante todo</h3>
+                    <img src="images/placeholders/warning-icon.png" alt="Advertencia" class="warnings-icon-img" loading="lazy">
+                    <p class="warnings-intro">Aunque nuestro protocolo es natural, <strong>no debe ser utilizado por:</strong></p>
+
+                    <ul class="warnings-list">
+                        <li>
+                            <i class="fas fa-times-circle"></i>
+                            <span>Mujeres en estado de embarazo o lactancia</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-times-circle"></i>
+                            <span>Menores de 12 años</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-times-circle"></i>
+                            <span>Personas con condiciones crónicas de colon (como Crohn o Colitis Ulcerosa)</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-times-circle"></i>
+                            <span>Personas con insuficiencia renal o cardíaca severa</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 7: PRECIOS Y GARANTÍA -->
+    <section class="pricing" id="precios">
+        <div class="container">
+            <div class="pricing-card">
+                <div class="pricing-badge">
+                    <i class="fas fa-star"></i>
+                    OFERTA ESPECIAL
+                </div>
+
+                <h2 class="pricing-title">EL KIT COMPLETO (SISTEMA DE 4 PASOS)</h2>
+
+                <p class="pricing-description">Incluye todo lo necesario para tu transformación de 4 días:</p>
+
+                <div class="pricing-price">
+                    <span class="price-currency">$</span>
+                    <span class="price-amount">90.000</span>
+                    <span class="price-label">COP</span>
+                </div>
+
+                <div class="pricing-benefits">
+                    <h3 class="benefits-title">Componentes del Kit:</h3>
+                    <ul class="benefits-list">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>1 Purgante de Acción Profunda</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>1 Vinagre de Pitaya Concentrado</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>1 Fibra Digestiva de Arrastre</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>3 Laxantes Magistrales</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="pricing-plus">+</div>
+
+                <div class="pricing-gift">
+                    <h3 class="gift-title">REGALO ESPECIAL (INCLUIDO HOY)</h3>
+                    <p class="gift-description">Guía Digital Post-Detox: "Cómo mantener tu abdomen plano y evitar la inflamación después de los 4 días".</p>
+                </div>
+
+                <a href="#formulario" class="btn btn-primary btn-large">ORDENAR AHORA - PAGO CONTRA ENTREGA</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 8: FAQ -->
+    <section class="faq" id="preguntas">
+        <div class="container">
+            <h2 class="section-title">Preguntas Frecuentes</h2>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>¿Hay efecto rebote?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>No, porque no es una dieta de hambre, es una limpieza de desechos. Si te cuidas después, los resultados se mantienen.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>¿Es seguro?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sí, está basado en componentes naturales como la Pitaya y fibras que tu cuerpo reconoce.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>¿Puedo trabajar mientras lo hago?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Recomendamos los días 1 y 2 (los más intensos) hacerlos en un día de descanso para tu total comodidad. Los días 3 y 4 puedes seguir con tu rutina normal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORMULARIO DE PEDIDO -->
+    <section class="form-section" id="formulario">
+        <div class="container">
+            <div class="form-wrapper">
+                <h2 class="section-title">Haz tu pedido ahora</h2>
+                <p class="form-subtitle">Completa tus datos y te contactaremos para confirmar tu pedido</p>
+
+                <form id="orderForm" class="order-form">
+                    <div class="form-group">
+                        <label for="nombre">Nombre completo *</label>
+                        <input type="text" id="nombre" name="nombre" required placeholder="Ej: María García">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">Teléfono *</label>
+                        <input type="tel" id="telefono" name="telefono" required placeholder="Ej: 300 123 4567">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ciudad">Ciudad *</label>
+                        <input type="text" id="ciudad" name="ciudad" required placeholder="Ej: Bogotá">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="direccion">Dirección completa *</label>
+                        <textarea id="direccion" name="direccion" rows="3" required placeholder="Calle, número, barrio, referencias"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="observaciones">Observaciones (opcional)</label>
+                        <textarea id="observaciones" name="observaciones" rows="2" placeholder="¿Alguna indicación especial para la entrega?"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-large">
+                        <i class="fab fa-whatsapp"></i>
+                        ENVIAR PEDIDO POR WHATSAPP
+                    </button>
+
+                    <p class="form-note">
+                        <i class="fas fa-lock"></i>
+                        Tus datos están seguros. Solo se usan para procesar tu pedido.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 9: FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Detox Sabeho</h3>
+                    <p>Protocolo de Reinicio Intestinal</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>
+                        <i class="fab fa-whatsapp"></i>
+                        <a href="https://wa.me/57XXXXXXXXXX" target="_blank">WhatsApp</a>
+                    </p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Envíos con:</h4>
+                    <div class="footer-carriers">
+                        <span>Servientrega</span>
+                        <span>Envía</span>
+                        <span>Interrapidísimo</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Detox Sabeho. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="js/countdown.js"></script>
+    <script src="js/carousel.js"></script>
+    <script src="js/form.js"></script>
+    <script src="js/timeline.js"></script>
+
+    <!-- FAQ Accordion Script -->
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const isOpen = button.getAttribute('aria-expanded') === 'true';
+
+                // Cerrar todas las demás preguntas
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                    item.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                });
+
+                // Toggle la pregunta actual
+                if (!isOpen) {
+                    faqItem.classList.add('active');
+                    button.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+
+        // Smooth scroll para los enlaces ancla
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+    <script src="js/scroll-video.js"></script>
+</body>
+</html>
