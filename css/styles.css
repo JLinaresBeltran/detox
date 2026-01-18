@@ -3417,3 +3417,160 @@ h6 {
         max-width: 1100px;
     }
 }
+
+/* ================================
+   HERO IMAGE FULL (VERTICAL)
+   ================================ */
+.hero-img-full {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 767px) {
+
+    /* En mobile: Full width/height edge-to-edge */
+    .hero-section {
+        padding: 0 !important;
+        /* Quitar padding vertical de la sección */
+    }
+
+    .hero-section .container {
+        padding: 0 !important;
+        /* Quitar padding horizontal del container solo para esta sección */
+        width: 100% !important;
+        max-width: none !important;
+    }
+
+    .hero-img-full {
+        width: 100%;
+        /* Changed from 100vw to avoid scrollbar/offset issues */
+        max-width: none;
+        border-radius: 0;
+        margin: 0;
+        vertical-align: bottom;
+        /* Evitar espacio extra abajo */
+    }
+
+    .hero-content,
+    .hero-text {
+        gap: 0;
+        margin: 0;
+    }
+}
+
+@media (min-width: 768px) {
+
+    /* En desktop: Centrado y contenido */
+    .hero-img-full {
+        max-width: 500px;
+        margin: 0 auto;
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-xl);
+    }
+}
+
+/* ================================
+   PROBLEM SECTION (FULL IMAGE)
+   ================================ */
+@media (max-width: 767px) {
+
+    /* Apply same edge-to-edge logic to problem section */
+    .problem {
+        padding: 0 !important;
+    }
+
+    .problem .container {
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: none !important;
+    }
+
+    /* Ensure content wrapper doesn't add spacing */
+    .problem-content {
+        margin: 0;
+        width: 100%;
+    }
+}
+
+/* ================================
+   IMAGE OVERLAY BUTTON
+   ================================ */
+.hero-image-full {
+    position: relative;
+    /* Context for absolute positioning */
+    display: block;
+    /* Safer than inline-block for full width */
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    /* Helper for some browsers */
+}
+
+.btn-overlay {
+    position: absolute;
+    bottom: 30px;
+    /* Adjust spacing from bottom */
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    /* Robust centering */
+    transform: none;
+    /* Remove translation */
+    width: 90%;
+    /* Slightly wider on mobile */
+    max-width: 300px;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    /* Stronger shadow for visibility over image */
+}
+/* ================================
+   SOLUTION FINAL SECTION (FULL IMAGE)
+   ================================ */
+@media (max-width: 767px) {
+    .solution-visual {
+        padding: 0 !important;
+    }
+    .solution-visual .container {
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: none !important;
+    }
+    .solution-content {
+        margin: 0;
+        width: 100%;
+    }
+}
+
+/* ================================
+   SAFETY SECTION (Full Image w/ Padded Content)
+   ================================ */
+@media (max-width: 767px) {
+    /* Remove padding from main container so image hits edges */
+    .safety {
+        padding-top: 2rem !important; /* Keep some top spacing for title */
+        padding-bottom: 2rem !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    
+    .safety .container {
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: none !important;
+    }
+
+    /* Restore padding for text elements that shouldn't touch edges */
+    .safety-header, 
+    .safety-content {
+        padding-left: 15px; /* Standard bootstrap-like padding */
+        padding-right: 15px;
+    }
+
+    /* Ensure image wrapper has no padding/margin */
+    .safety .hero-image-full {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
