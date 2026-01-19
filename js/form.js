@@ -12,9 +12,6 @@
 (function () {
     'use strict';
 
-    // Configuración
-    const FORM_ID = 'y23sdazrtoy'; // ID del formulario Forminit
-
     // Configuración de paquetes
     const PACKAGES = {
         1: {
@@ -362,15 +359,10 @@
     }
 
     /**
-     * Envía los datos a Getform usando Forminit SDK
+     * Envía los datos al backend propio
      */
-    async function sendToGetform(formData, packageId) {
+    async function sendToBackend(formData, packageId) {
         try {
-            if (typeof Forminit === 'undefined') {
-                console.error('❌ Forminit SDK no está cargado');
-                return false;
-            }
-
             const pkg = PACKAGES[packageId];
             if (!pkg) {
                 console.error('❌ Paquete inválido:', packageId);
@@ -387,34 +379,46 @@
                 observaciones: sanitizeString(formData.observaciones)
             };
 
-            // Combinar campos para reducir a máximo 10 campos (Forminit limit)
-            const ubicacion = `${sanitizedData.departamento}, ${sanitizedData.ciudad}`;
-            const resumenPrecio = `Producto: ${formatPrice(pkg.productPrice)} | Envío: ${pkg.shippingLabel} | Total: ${formatPrice(pkg.total)}`;
+            const payload = {
+                product: {
+                    id: packageId,
+                    name: pkg.name,
+                    quantity: pkg.quantity,
+                    price: pkg.productPrice,
+                    shipping: pkg.shippingCost,
+                    total: pkg.total
+                },
+                customer: sanitizedData
+            };
 
-            const data = new FormData();
-            // 9 campos en total (dentro del límite de 10)
-            data.append('fi-text-nombre', sanitizedData.nombre);
-            data.append('fi-text-telefono', sanitizedData.telefono);
-            data.append('fi-text-correo', sanitizedData.correo);
-            data.append('fi-text-ubicacion', ubicacion); // Departamento + Ciudad combinados
-            data.append('fi-text-direccion', sanitizedData.direccion);
-            data.append('fi-text-observaciones', sanitizedData.observaciones);
-            data.append('fi-text-producto', `${pkg.name} (${pkg.quantity} unidad${pkg.quantity > 1 ? 'es' : ''})`);
-            data.append('fi-text-resumen-precio', resumenPrecio); // Precios combinados
-            data.append('fi-text-fecha', new Date().toLocaleString('es-CO'));
+            console.log('📤 Enviando pedido al backend...');
 
-            const forminit = new Forminit();
-            const { data: response, error } = await forminit.submit(FORM_ID, data);
+            const response = await fetch('/api/submit-order.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify(payload)
+            });
 
-            if (error) {
-                console.error('❌ Error al enviar a Getform:', error.message);
+            if (!response.ok) {
+                console.error('❌ Error HTTP:', response.status);
                 return false;
             }
 
-            console.log('✅ Pedido enviado correctamente:', pkg.name);
-            return true;
+            const result = await response.json();
+
+            if (result.success) {
+                console.log('✅ Pedido enviado:', result.orderId);
+                return true;
+            } else {
+                console.error('❌ Error:', result.error);
+                return false;
+            }
+
         } catch (error) {
-            console.error('❌ Error al enviar a Getform:', error);
+            console.error('❌ Error al enviar:', error);
             return false;
         }
     }
@@ -505,7 +509,7 @@
             observaciones: document.getElementById('observaciones-individual').value.trim()
         };
 
-        const sendSuccess = await sendToGetform(formData, 1);
+        const sendSuccess = await sendToBackend(formData, 1);
 
         if (!sendSuccess && submitButton) {
             submitButton.disabled = false;
@@ -514,20 +518,13 @@
             return;
         }
 
-        // Enviar evento a Facebook Conversions API (no bloqueante)
-        if (typeof sendFacebookPurchaseEvent === 'function') {
-            try {
-                const cleanPhone = cleanPhoneNumber(document.getElementById('telefono-individual').value);
-                await sendFacebookPurchaseEvent({
-                    phone: cleanPhone,
-                    packageId: 1,
-                    email: document.getElementById('correo-individual').value.trim(),
-                    firstName: document.getElementById('nombre-individual').value.trim()
-                });
-            } catch (error) {
-                console.error('⚠️ Error al enviar evento a Facebook:', error);
-                // No interrumpir el flujo del usuario
-            }
+        // Rastrear Purchase en Meta Pixel
+        if (typeof fbq === 'function') {
+            fbq('track', 'Purchase', {
+                value: 110000,
+                currency: 'COP',
+                content_name: 'Kit Detox 4 Días'
+            });
         }
 
         showSuccessMessage(formData, 1);
@@ -559,7 +556,7 @@
             observaciones: document.getElementById('observaciones-duo').value.trim()
         };
 
-        const sendSuccess = await sendToGetform(formData, 2);
+        const sendSuccess = await sendToBackend(formData, 2);
 
         if (!sendSuccess && submitButton) {
             submitButton.disabled = false;
@@ -568,20 +565,13 @@
             return;
         }
 
-        // Enviar evento a Facebook Conversions API (no bloqueante)
-        if (typeof sendFacebookPurchaseEvent === 'function') {
-            try {
-                const cleanPhone = cleanPhoneNumber(document.getElementById('telefono-duo').value);
-                await sendFacebookPurchaseEvent({
-                    phone: cleanPhone,
-                    packageId: 2,
-                    email: document.getElementById('correo-duo').value.trim(),
-                    firstName: document.getElementById('nombre-duo').value.trim()
-                });
-            } catch (error) {
-                console.error('⚠️ Error al enviar evento a Facebook:', error);
-                // No interrumpir el flujo del usuario
-            }
+        // Rastrear Purchase en Meta Pixel
+        if (typeof fbq === 'function') {
+            fbq('track', 'Purchase', {
+                value: 160000,
+                currency: 'COP',
+                content_name: 'Plan Dúo: Reinicio Total'
+            });
         }
 
         showSuccessMessage(formData, 2);

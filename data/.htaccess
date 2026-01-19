@@ -1,0 +1,10 @@
+# Proteger acceso directo a archivos en el directorio data
+# Solo permitir acceso a través de scripts PHP
+
+Order Deny,Allow
+Deny from all
+
+# Permitir acceso a archivos PHP (si los hay en el futuro)
+<FilesMatch "\.php$">
+    Allow from all
+</FilesMatch>
