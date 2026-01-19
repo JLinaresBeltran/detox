@@ -514,6 +514,22 @@
             return;
         }
 
+        // Enviar evento a Facebook Conversions API (no bloqueante)
+        if (typeof sendFacebookPurchaseEvent === 'function') {
+            try {
+                const cleanPhone = cleanPhoneNumber(document.getElementById('telefono-individual').value);
+                await sendFacebookPurchaseEvent({
+                    phone: cleanPhone,
+                    packageId: 1,
+                    email: document.getElementById('correo-individual').value.trim(),
+                    firstName: document.getElementById('nombre-individual').value.trim()
+                });
+            } catch (error) {
+                console.error('⚠️ Error al enviar evento a Facebook:', error);
+                // No interrumpir el flujo del usuario
+            }
+        }
+
         showSuccessMessage(formData, 1);
     }
 
@@ -550,6 +566,22 @@
             submitButton.textContent = 'COMPRAR AHORA';
             isSubmittingDuo = false;
             return;
+        }
+
+        // Enviar evento a Facebook Conversions API (no bloqueante)
+        if (typeof sendFacebookPurchaseEvent === 'function') {
+            try {
+                const cleanPhone = cleanPhoneNumber(document.getElementById('telefono-duo').value);
+                await sendFacebookPurchaseEvent({
+                    phone: cleanPhone,
+                    packageId: 2,
+                    email: document.getElementById('correo-duo').value.trim(),
+                    firstName: document.getElementById('nombre-duo').value.trim()
+                });
+            } catch (error) {
+                console.error('⚠️ Error al enviar evento a Facebook:', error);
+                // No interrumpir el flujo del usuario
+            }
         }
 
         showSuccessMessage(formData, 2);
