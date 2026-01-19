@@ -1,0 +1,31 @@
+# Dependencias PHP
+vendor/
+composer.lock
+
+# Variables de entorno
+.env
+.env.local
+.env.*.local
+
+# Archivos del sistema
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+*.log
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Carpetas de caché
+node_modules/
+.cache/
+
+# Archivos temporales
+*.tmp
+*.temp
+*.backup
