@@ -1,6 +1,5 @@
 # Dependencias PHP
 vendor/
-composer.lock
 
 # Variables de entorno
 .env
