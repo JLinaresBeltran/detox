@@ -1,6 +1,6 @@
 <?php
 /**
- * EmailService - Integración con Resend.com
+ * EmailService - Integración con Resend.com usando cURL
  *
  * Maneja:
  * - Envío de emails de confirmación al cliente
@@ -12,10 +12,11 @@
 
 class EmailService
 {
-    private $resend;
+    private $apiKey;
     private $fromEmail;
     private $fromName;
     private $maxRetries = 3;
+    private $apiBaseUrl = 'https://api.resend.com';
 
     public function __construct($apiKey = null)
     {
@@ -25,8 +26,7 @@ class EmailService
             throw new Exception('RESEND_API_KEY no está configurada');
         }
 
-        // Inicializar cliente de Resend
-        $this->resend = \Resend::client($apiKey);
+        $this->apiKey = $apiKey;
         $this->fromEmail = 'pedidos@' . EMAIL_FROM_DOMAIN;
         $this->fromName = 'Detox Sabeho';
     }
@@ -119,7 +119,7 @@ class EmailService
     }
 
     /**
-     * Envía un email con retry automático
+     * Envía un email con retry automático usando cURL
      *
      * @param array $emailData Datos del email
      * @param string $type Tipo de email (para logging)
@@ -134,26 +134,72 @@ class EmailService
             $attempts++;
 
             try {
-                $result = $this->resend->emails->send($emailData);
+                $response = $this->sendViaResendAPI($emailData);
 
-                if (isset($result->id)) {
-                    logMessage("Email {$type} enviado correctamente (intento {$attempts}): {$result->id}", 'INFO');
+                if ($response && isset($response['id'])) {
+                    logMessage("Email {$type} enviado correctamente (intento {$attempts}): {$response['id']}", 'INFO');
                     return true;
+                } else {
+                    $lastError = isset($response['message']) ? $response['message'] : 'Error desconocido';
                 }
 
             } catch (Exception $e) {
                 $lastError = $e->getMessage();
-                logMessage("Error al enviar email {$type} (intento {$attempts}): {$lastError}", 'WARNING');
+            }
 
-                // Esperar antes de reintentar (backoff exponencial)
-                if ($attempts < $this->maxRetries) {
-                    sleep(pow(2, $attempts)); // 2, 4, 8 segundos
-                }
+            logMessage("Error al enviar email {$type} (intento {$attempts}): {$lastError}", 'WARNING');
+
+            // Esperar antes de reintentar (backoff exponencial)
+            if ($attempts < $this->maxRetries) {
+                sleep(pow(2, $attempts)); // 2, 4, 8 segundos
             }
         }
 
         logMessage("Fallo definitivo al enviar email {$type} después de {$attempts} intentos: {$lastError}", 'ERROR');
         return false;
+    }
+
+    /**
+     * Envía email usando Resend API con cURL
+     *
+     * @param array $emailData Datos del email
+     * @return array|false Respuesta de la API
+     */
+    private function sendViaResendAPI($emailData)
+    {
+        $ch = curl_init();
+
+        $postData = json_encode($emailData);
+
+        curl_setopt_array($ch, [
+            CURLOPT_URL => $this->apiBaseUrl . '/emails',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $postData,
+            CURLOPT_HTTPHEADER => [
+                'Content-Type: application/json',
+                'Authorization: Bearer ' . $this->apiKey
+            ],
+            CURLOPT_TIMEOUT => 10,
+            CURLOPT_SSL_VERIFYPEER => true
+        ]);
+
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error = curl_error($ch);
+
+        curl_close($ch);
+
+        if ($error) {
+            throw new Exception("cURL error: $error");
+        }
+
+        if ($httpCode >= 400) {
+            throw new Exception("HTTP error: $httpCode");
+        }
+
+        $result = json_decode($response, true);
+        return $result;
     }
 
     /**
