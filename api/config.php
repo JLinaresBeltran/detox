@@ -97,6 +97,11 @@ define('ADMIN_PASSWORD_HASH', getenv('ADMIN_PASSWORD_HASH') ?: '$2y$10$WkqZ3vH7L
 define('APP_ENV', getenv('APP_ENV') ?: 'development');
 define('APP_URL', getenv('APP_URL') ?: 'http://localhost');
 
+// Facebook Configuration
+define('FACEBOOK_PIXEL_ID', getenv('FACEBOOK_PIXEL_ID') ?: '1142678136915324');
+define('FACEBOOK_ACCESS_TOKEN', getenv('FACEBOOK_ACCESS_TOKEN') ?: '');
+define('FACEBOOK_API_VERSION', getenv('FACEBOOK_API_VERSION') ?: 'v19.0');
+
 // Emails
 define('ADMIN_EMAIL', 'auxiliarmanuv@gmail.com');
 

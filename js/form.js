@@ -191,6 +191,24 @@
      * ABRIR MODAL SEGÚN PAQUETE SELECCIONADO
      */
     function showFormForPackage(packageId) {
+        const packageNum = parseInt(packageId);
+        const pkg = PACKAGES[packageNum];
+
+        // Enviar evento AddToCart a Facebook
+        if (typeof window.sendFacebookEvent === 'function' && pkg) {
+            window.sendFacebookEvent({
+                eventName: 'AddToCart',
+                packageId: packageNum,
+                value: pkg.productPrice,
+                currency: 'COP',
+                contentName: pkg.name,
+                contentType: 'product'
+            }).catch(error => {
+                console.warn('No se pudo enviar evento AddToCart a Facebook:', error);
+                // Continuar sin bloquear el flujo
+            });
+        }
+
         if (packageId === '1') {
             formSectionIndividual.classList.add('show');
             formSectionDuo.classList.remove('show');
@@ -699,10 +717,35 @@
     }
 
     /**
+     * Envía evento ViewContent para los productos disponibles
+     */
+    function trackProductViews() {
+        if (typeof window.sendFacebookEvent !== 'function') {
+            return; // Facebook no está listo
+        }
+
+        // Rastrear cada producto visible en la página
+        Object.entries(PACKAGES).forEach(([packageId, pkg]) => {
+            window.sendFacebookEvent({
+                eventName: 'ViewContent',
+                packageId: parseInt(packageId),
+                contentName: pkg.name,
+                contentType: 'product'
+            }).catch(error => {
+                console.warn(`No se pudo enviar ViewContent para producto ${packageId}:`, error);
+            });
+        });
+    }
+
+    /**
      * Inicializa el manejo de formularios
      */
     function init() {
         setupEventListeners();
+
+        // Enviar eventos ViewContent después de un pequeño delay
+        // para permitir que los scripts de Facebook se carguen
+        setTimeout(trackProductViews, 500);
     }
 
     // Iniciar cuando el DOM esté listo
