@@ -420,6 +420,61 @@
     }
 
     /**
+     * Envía los datos al backend PHP para guardar pedido y enviar emails
+     */
+    async function sendToBackend(formData, packageId) {
+        try {
+            const pkg = PACKAGES[packageId];
+            if (!pkg) {
+                console.error('❌ Paquete inválido:', packageId);
+                return false;
+            }
+
+            const payload = {
+                product: {
+                    id: packageId,
+                    name: pkg.name,
+                    quantity: pkg.quantity,
+                    price: pkg.productPrice,
+                    shipping: pkg.shippingCost,
+                    total: pkg.total
+                },
+                customer: {
+                    nombre: formData.nombre,
+                    telefono: formData.telefono,
+                    correo: formData.correo,
+                    departamento: formData.departamento,
+                    ciudad: formData.ciudad,
+                    direccion: formData.direccion,
+                    observaciones: formData.observaciones
+                }
+            };
+
+            const response = await fetch('/api/submit-order.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                console.log('✅ Pedido guardado en backend:', result.orderId);
+                return true;
+            } else {
+                console.error('❌ Error al guardar en backend:', result.error);
+                return false;
+            }
+        } catch (error) {
+            console.error('❌ Error al enviar a backend:', error);
+            return false;
+        }
+    }
+
+    /**
      * Muestra modal de confirmación
      */
     function showSuccessMessage(formData, packageId) {
@@ -493,6 +548,8 @@
         if (submitButton) {
             submitButton.disabled = true;
             submitButton.textContent = 'Procesando...';
+            submitButton.style.opacity = '0.6';
+            submitButton.style.cursor = 'not-allowed';
         }
 
         const formData = {
@@ -505,16 +562,21 @@
             observaciones: document.getElementById('observaciones-individual').value.trim()
         };
 
-        const sendSuccess = await sendToGetform(formData, 1);
-
-        if (!sendSuccess && submitButton) {
-            submitButton.disabled = false;
-            submitButton.textContent = 'COMPRAR AHORA';
-            isSubmittingIndividual = false;
-            return;
+        // Track Meta Pixel conversion (if fbq exists)
+        if (typeof fbq === 'function') {
+            fbq('track', 'Purchase', {
+                value: PACKAGES[1].total,
+                currency: 'COP',
+                content_name: PACKAGES[1].name
+            });
         }
 
+        // MOSTRAR CONFIRMACIÓN INMEDIATAMENTE (SIN ESPERAR BACKEND)
         showSuccessMessage(formData, 1);
+
+        // Enviar a backends en BACKGROUND (sin await, sin bloquear UI)
+        sendToGetform(formData, 1).catch(console.error);
+        sendToBackend(formData, 1).catch(console.error);
     }
 
     /**
@@ -531,6 +593,8 @@
         if (submitButton) {
             submitButton.disabled = true;
             submitButton.textContent = 'Procesando...';
+            submitButton.style.opacity = '0.6';
+            submitButton.style.cursor = 'not-allowed';
         }
 
         const formData = {
@@ -543,16 +607,21 @@
             observaciones: document.getElementById('observaciones-duo').value.trim()
         };
 
-        const sendSuccess = await sendToGetform(formData, 2);
-
-        if (!sendSuccess && submitButton) {
-            submitButton.disabled = false;
-            submitButton.textContent = 'COMPRAR AHORA';
-            isSubmittingDuo = false;
-            return;
+        // Track Meta Pixel conversion (if fbq exists)
+        if (typeof fbq === 'function') {
+            fbq('track', 'Purchase', {
+                value: PACKAGES[2].total,
+                currency: 'COP',
+                content_name: PACKAGES[2].name
+            });
         }
 
+        // MOSTRAR CONFIRMACIÓN INMEDIATAMENTE (SIN ESPERAR BACKEND)
         showSuccessMessage(formData, 2);
+
+        // Enviar a backends en BACKGROUND (sin await, sin bloquear UI)
+        sendToGetform(formData, 2).catch(console.error);
+        sendToBackend(formData, 2).catch(console.error);
     }
 
     /**
