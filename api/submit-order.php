@@ -262,60 +262,62 @@ try {
 }
 
 // ============================================================================
-// ENVIAR EMAILS
+// RESPUESTA INMEDIATA (SIN ESPERAR EMAILS)
 // ============================================================================
 
-// Inicializar servicio de email
-try {
-    $emailService = new EmailService();
-    $emailsSent = true;
-
-    // Enviar email al cliente
-    try {
-        $customerEmailSent = $emailService->sendCustomerEmail($order);
-        if (!$customerEmailSent) {
-            logMessage("No se pudo enviar email al cliente: {$customer['correo']}", 'WARNING');
-        }
-    } catch (Exception $e) {
-        logMessage("Error al enviar email al cliente: " . $e->getMessage(), 'WARNING');
-        $emailsSent = false;
-    }
-
-    // Enviar email al admin
-    try {
-        $adminEmailSent = $emailService->sendAdminEmail($order);
-        if (!$adminEmailSent) {
-            logMessage("No se pudo enviar email al admin", 'WARNING');
-        }
-    } catch (Exception $e) {
-        logMessage("Error al enviar email al admin: " . $e->getMessage(), 'WARNING');
-        $emailsSent = false;
-    }
-
-    // Enviar backup (no bloquear si falla)
-    try {
-        $orderManager->backupToEmail($emailService);
-    } catch (Exception $e) {
-        logMessage("Error al enviar backup: " . $e->getMessage(), 'WARNING');
-    }
-
-} catch (Exception $e) {
-    logMessage("Error al inicializar servicio de email: " . $e->getMessage(), 'ERROR');
-    $emailsSent = false;
-}
-
-// ============================================================================
-// RESPUESTA EXITOSA
-// ============================================================================
-
-// IMPORTANTE: Aunque el envío de email falle, el pedido se guarda y se retorna éxito
-// Esto previene bloquear la compra si hay problemas temporales con el servicio de email
-
+// Responder INMEDIATAMENTE al frontend con el pedido guardado
+// Los emails se enviarán en background
 jsonResponse([
     'success' => true,
     'orderId' => $order['id'],
     'orderNumber' => $order['orderNumber'],
     'timestamp' => $order['timestamp'],
-    'message' => '¡Pedido recibido correctamente! Pronto nos pondremos en contacto contigo.',
-    'emailsSent' => $emailsSent
+    'message' => '¡Pedido recibido correctamente! Pronto nos pondremos en contacto contigo.'
 ], 200);
+
+// ============================================================================
+// ENVIAR EMAILS EN BACKGROUND (Sin bloquear respuesta)
+// ============================================================================
+
+// Se ejecuta DESPUÉS de responder al cliente
+// No bloquea la experiencia del usuario
+
+register_shutdown_function(function() use ($order, $orderManager, $customer, $emailService) {
+    try {
+        // Inicializar servicio de email si no existe
+        if (!isset($emailService)) {
+            $emailService = new EmailService();
+        }
+
+        // Enviar email al cliente
+        try {
+            $customerEmailSent = $emailService->sendCustomerEmail($order);
+            if (!$customerEmailSent) {
+                logMessage("No se pudo enviar email al cliente: {$customer['correo']}", 'WARNING');
+            }
+        } catch (Exception $e) {
+            logMessage("Error al enviar email al cliente: " . $e->getMessage(), 'WARNING');
+        }
+
+        // Enviar email al admin
+        try {
+            $adminEmailSent = $emailService->sendAdminEmail($order);
+            if (!$adminEmailSent) {
+                logMessage("No se pudo enviar email al admin", 'WARNING');
+            }
+        } catch (Exception $e) {
+            logMessage("Error al enviar email al admin: " . $e->getMessage(), 'WARNING');
+        }
+
+        // Enviar backup
+        try {
+            $orderManager->backupToEmail($emailService);
+        } catch (Exception $e) {
+            logMessage("Error al enviar backup: " . $e->getMessage(), 'WARNING');
+        }
+
+        logMessage("Emails procesados en background para pedido: {$order['id']}", 'INFO');
+    } catch (Exception $e) {
+        logMessage("Error al procesar emails en background: " . $e->getMessage(), 'ERROR');
+    }
+});
