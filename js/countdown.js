@@ -17,7 +17,7 @@
     const countdownElement = document.getElementById('countdown');
 
     if (!countdownElement) {
-        console.warn('Elemento countdown no encontrado');
+        console.debug('Elemento countdown no encontrado (se usa en otra página)');
         return;
     }
 

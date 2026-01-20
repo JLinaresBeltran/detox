@@ -137,9 +137,10 @@
                 return false;
             }
 
-            // Validar que al menos haya datos de usuario
-            if (!options.phone && !options.email && !options.firstName) {
-                logError('Se requiere al menos uno: teléfono, email o nombre');
+            // Validar que al menos haya datos de usuario SOLO para Purchase
+            // ViewContent y AddToCart pueden enviarse sin usuario
+            if (options.eventName === 'Purchase' && !options.phone && !options.email && !options.firstName) {
+                logError('Purchase requiere al menos uno: teléfono, email o nombre');
                 return false;
             }
 
