@@ -549,15 +549,32 @@
         e.preventDefault();
 
         if (isSubmittingIndividual) return;
-        if (!validateFormIndividual()) return;
 
-        isSubmittingIndividual = true;
+        // 1. DESHABILITAR BOTÓN INMEDIATAMENTE
         const submitButton = formIndividual.querySelector('button[type="submit"]');
         if (submitButton) {
             submitButton.disabled = true;
             submitButton.textContent = 'Procesando...';
+            submitButton.style.opacity = '0.6';
+            submitButton.style.cursor = 'not-allowed';
         }
 
+        isSubmittingIndividual = true;
+
+        // 2. VALIDAR FORMULARIO
+        if (!validateFormIndividual()) {
+            // Si la validación falla, reactivar botón
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = 'COMPRAR AHORA';
+                submitButton.style.opacity = '';
+                submitButton.style.cursor = '';
+            }
+            isSubmittingIndividual = false;
+            return;
+        }
+
+        // 3. RECOPILAR DATOS
         const formData = {
             nombre: document.getElementById('nombre-individual').value.trim(),
             telefono: formatPhoneDisplay(document.getElementById('telefono-individual').value),
@@ -568,16 +585,19 @@
             observaciones: document.getElementById('observaciones-individual').value.trim()
         };
 
+        // 4. ENVIAR AL BACKEND
         const sendSuccess = await sendToBackend(formData, 1);
 
         if (!sendSuccess && submitButton) {
             submitButton.disabled = false;
             submitButton.textContent = 'COMPRAR AHORA';
+            submitButton.style.opacity = '';
+            submitButton.style.cursor = '';
             isSubmittingIndividual = false;
             return;
         }
 
-        // Rastrear Purchase en Meta Pixel
+        // 5. RASTREAR COMPRA EN META PIXEL
         if (typeof fbq === 'function') {
             fbq('track', 'Purchase', {
                 value: 110000,
@@ -586,6 +606,7 @@
             });
         }
 
+        // 6. MOSTRAR CONFIRMACIÓN
         showSuccessMessage(formData, 1);
     }
 
@@ -596,15 +617,32 @@
         e.preventDefault();
 
         if (isSubmittingDuo) return;
-        if (!validateFormDuo()) return;
 
-        isSubmittingDuo = true;
+        // 1. DESHABILITAR BOTÓN INMEDIATAMENTE
         const submitButton = formDuo.querySelector('button[type="submit"]');
         if (submitButton) {
             submitButton.disabled = true;
             submitButton.textContent = 'Procesando...';
+            submitButton.style.opacity = '0.6';
+            submitButton.style.cursor = 'not-allowed';
         }
 
+        isSubmittingDuo = true;
+
+        // 2. VALIDAR FORMULARIO
+        if (!validateFormDuo()) {
+            // Si la validación falla, reactivar botón
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = 'COMPRAR AHORA';
+                submitButton.style.opacity = '';
+                submitButton.style.cursor = '';
+            }
+            isSubmittingDuo = false;
+            return;
+        }
+
+        // 3. RECOPILAR DATOS
         const formData = {
             nombre: document.getElementById('nombre-duo').value.trim(),
             telefono: formatPhoneDisplay(document.getElementById('telefono-duo').value),
@@ -615,16 +653,19 @@
             observaciones: document.getElementById('observaciones-duo').value.trim()
         };
 
+        // 4. ENVIAR AL BACKEND
         const sendSuccess = await sendToBackend(formData, 2);
 
         if (!sendSuccess && submitButton) {
             submitButton.disabled = false;
             submitButton.textContent = 'COMPRAR AHORA';
+            submitButton.style.opacity = '';
+            submitButton.style.cursor = '';
             isSubmittingDuo = false;
             return;
         }
 
-        // Rastrear Purchase en Meta Pixel
+        // 5. RASTREAR COMPRA EN META PIXEL
         if (typeof fbq === 'function') {
             fbq('track', 'Purchase', {
                 value: 160000,
@@ -633,6 +674,7 @@
             });
         }
 
+        // 6. MOSTRAR CONFIRMACIÓN
         showSuccessMessage(formData, 2);
     }
 
