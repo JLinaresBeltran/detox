@@ -42,6 +42,24 @@
     let isSubmittingIndividual = false;
     let isSubmittingDuo = false;
 
+    // Bandera para prevenir múltiples aperturas simultáneas
+    let isOpeningModal = false;
+
+    /**
+     * Función de debounce para prevenir múltiples clics
+     */
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
     /**
      * Sanitiza strings para prevenir inyección de HTML/XSS
      */
@@ -194,32 +212,55 @@
         const packageNum = parseInt(packageId);
         const pkg = PACKAGES[packageNum];
 
-        // Enviar evento AddToCart a Facebook
-        if (typeof window.sendFacebookEvent === 'function' && pkg) {
-            window.sendFacebookEvent({
-                eventName: 'AddToCart',
-                packageId: packageNum,
-                value: pkg.productPrice,
-                currency: 'COP',
-                contentName: pkg.name,
-                contentType: 'product'
-            }).catch(error => {
-                console.warn('No se pudo enviar evento AddToCart a Facebook:', error);
-                // Continuar sin bloquear el flujo
-            });
+        if (!pkg) {
+            console.error('Paquete no encontrado:', packageId);
+            return;
         }
 
+        // 1. DESHABILITAR TODOS LOS BOTONES INMEDIATAMENTE
+        const buttons = document.querySelectorAll('.pricing-btn');
+        buttons.forEach(btn => {
+            btn.disabled = true;
+            btn.style.opacity = '0.6';
+            btn.style.cursor = 'not-allowed';
+        });
+
+        // 2. ABRIR EL MODAL INMEDIATAMENTE (SIN ESPERAR A FACEBOOK)
         if (packageId === '1') {
             formSectionIndividual.classList.add('show');
             formSectionDuo.classList.remove('show');
-            // Prevenir scroll en el body
             document.body.style.overflow = 'hidden';
         } else if (packageId === '2') {
             formSectionDuo.classList.add('show');
             formSectionIndividual.classList.remove('show');
-            // Prevenir scroll en el body
             document.body.style.overflow = 'hidden';
         }
+
+        // 3. ENVIAR EVENTO A FACEBOOK EN BACKGROUND (SIN BLOQUEAR)
+        // Se envía DESPUÉS de abrir el modal, en background
+        if (typeof window.sendFacebookEvent === 'function' && pkg) {
+            setTimeout(() => {
+                window.sendFacebookEvent({
+                    eventName: 'AddToCart',
+                    packageId: packageNum,
+                    value: pkg.productPrice,
+                    currency: 'COP',
+                    contentName: pkg.name,
+                    contentType: 'product'
+                }).catch(error => {
+                    console.warn('No se pudo enviar evento AddToCart a Facebook:', error);
+                });
+            }, 0); // setTimeout con 0 para enviar al final del event loop
+        }
+
+        // 4. REACTIVAR BOTONES después de un delay
+        setTimeout(() => {
+            buttons.forEach(btn => {
+                btn.disabled = false;
+                btn.style.opacity = '';
+                btn.style.cursor = '';
+            });
+        }, 1000); // 1 segundo de bloqueo
     }
 
     /**
@@ -703,16 +744,29 @@
             });
         }
 
-        // Event listeners para botones de pricing cards
+        // Event listeners para botones de pricing cards con debounce
         const pricingButtons = document.querySelectorAll('.pricing-btn');
         pricingButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
+            button.addEventListener('click', debounce(function(e) {
                 e.preventDefault();
+
+                // Prevenir apertura múltiple
+                if (isOpeningModal) {
+                    console.log('Modal ya está abriéndose, ignorando clic');
+                    return;
+                }
+
+                isOpeningModal = true;
                 const packageId = button.getAttribute('data-package');
                 if (packageId) {
                     showFormForPackage(packageId);
                 }
-            });
+
+                // Reset después de 500ms
+                setTimeout(() => {
+                    isOpeningModal = false;
+                }, 500);
+            }, 300)); // 300ms de debounce
         });
     }
 
