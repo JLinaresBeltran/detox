@@ -585,19 +585,7 @@
             observaciones: document.getElementById('observaciones-individual').value.trim()
         };
 
-        // 4. ENVIAR AL BACKEND
-        const sendSuccess = await sendToBackend(formData, 1);
-
-        if (!sendSuccess && submitButton) {
-            submitButton.disabled = false;
-            submitButton.textContent = 'COMPRAR AHORA';
-            submitButton.style.opacity = '';
-            submitButton.style.cursor = '';
-            isSubmittingIndividual = false;
-            return;
-        }
-
-        // 5. RASTREAR COMPRA EN META PIXEL
+        // 4. RASTREAR COMPRA EN META PIXEL (ANTES de mostrar modal)
         if (typeof fbq === 'function') {
             fbq('track', 'Purchase', {
                 value: 110000,
@@ -606,8 +594,14 @@
             });
         }
 
-        // 6. MOSTRAR CONFIRMACIÓN
+        // 5. MOSTRAR CONFIRMACIÓN INMEDIATAMENTE (SIN ESPERAR AL BACKEND)
         showSuccessMessage(formData, 1);
+
+        // 6. ENVIAR AL BACKEND EN BACKGROUND (sin bloquear)
+        // Fire and forget - no esperamos respuesta
+        sendToBackend(formData, 1).catch(error => {
+            console.error('⚠️ Error al enviar pedido en background:', error);
+        });
     }
 
     /**
@@ -653,19 +647,7 @@
             observaciones: document.getElementById('observaciones-duo').value.trim()
         };
 
-        // 4. ENVIAR AL BACKEND
-        const sendSuccess = await sendToBackend(formData, 2);
-
-        if (!sendSuccess && submitButton) {
-            submitButton.disabled = false;
-            submitButton.textContent = 'COMPRAR AHORA';
-            submitButton.style.opacity = '';
-            submitButton.style.cursor = '';
-            isSubmittingDuo = false;
-            return;
-        }
-
-        // 5. RASTREAR COMPRA EN META PIXEL
+        // 4. RASTREAR COMPRA EN META PIXEL (ANTES de mostrar modal)
         if (typeof fbq === 'function') {
             fbq('track', 'Purchase', {
                 value: 160000,
@@ -674,8 +656,14 @@
             });
         }
 
-        // 6. MOSTRAR CONFIRMACIÓN
+        // 5. MOSTRAR CONFIRMACIÓN INMEDIATAMENTE (SIN ESPERAR AL BACKEND)
         showSuccessMessage(formData, 2);
+
+        // 6. ENVIAR AL BACKEND EN BACKGROUND (sin bloquear)
+        // Fire and forget - no esperamos respuesta
+        sendToBackend(formData, 2).catch(error => {
+            console.error('⚠️ Error al enviar pedido en background:', error);
+        });
     }
 
     /**
