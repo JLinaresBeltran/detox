@@ -744,13 +744,13 @@
             });
         }
 
-        // Event listeners para botones de pricing cards con debounce
+        // Event listeners para botones de pricing cards - SIN DEBOUNCE (instantáneo)
         const pricingButtons = document.querySelectorAll('.pricing-btn');
         pricingButtons.forEach(button => {
-            button.addEventListener('click', debounce(function(e) {
+            button.addEventListener('click', function(e) {
                 e.preventDefault();
 
-                // Prevenir apertura múltiple
+                // Prevenir apertura múltiple - check instantáneo
                 if (isOpeningModal) {
                     console.log('Modal ya está abriéndose, ignorando clic');
                     return;
@@ -762,11 +762,11 @@
                     showFormForPackage(packageId);
                 }
 
-                // Reset después de 500ms
+                // Reset después de 500ms para permitir nuevos clics
                 setTimeout(() => {
                     isOpeningModal = false;
                 }, 500);
-            }, 300)); // 300ms de debounce
+            });
         });
     }
 
