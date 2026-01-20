@@ -262,24 +262,11 @@ try {
 }
 
 // ============================================================================
-// RESPUESTA INMEDIATA (SIN ESPERAR EMAILS)
-// ============================================================================
-
-// Responder INMEDIATAMENTE al frontend con el pedido guardado
-// Los emails se enviarán en background
-jsonResponse([
-    'success' => true,
-    'orderId' => $order['id'],
-    'orderNumber' => $order['orderNumber'],
-    'timestamp' => $order['timestamp'],
-    'message' => '¡Pedido recibido correctamente! Pronto nos pondremos en contacto contigo.'
-], 200);
-
-// ============================================================================
 // ENVIAR EMAILS EN BACKGROUND (Sin bloquear respuesta)
 // ============================================================================
 
-// Se ejecuta DESPUÉS de responder al cliente
+// IMPORTANTE: Registrar shutdown function ANTES de responder al cliente
+// Se ejecuta DESPUÉS de que jsonResponse() llame a exit()
 // No bloquea la experiencia del usuario
 
 register_shutdown_function(function() use ($order, $orderManager, $customer, $emailService) {
@@ -321,3 +308,17 @@ register_shutdown_function(function() use ($order, $orderManager, $customer, $em
         logMessage("Error al procesar emails en background: " . $e->getMessage(), 'ERROR');
     }
 });
+
+// ============================================================================
+// RESPUESTA INMEDIATA (SIN ESPERAR EMAILS)
+// ============================================================================
+
+// Responder INMEDIATAMENTE al frontend con el pedido guardado
+// Los emails se enviarán en background (shutdown function registrada arriba)
+jsonResponse([
+    'success' => true,
+    'orderId' => $order['id'],
+    'orderNumber' => $order['orderNumber'],
+    'timestamp' => $order['timestamp'],
+    'message' => '¡Pedido recibido correctamente! Pronto nos pondremos en contacto contigo.'
+], 200);
