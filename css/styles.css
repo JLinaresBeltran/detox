@@ -2986,99 +2986,6 @@ h6 {
     opacity: 0.8;
 }
 
-/* Cookie Banner */
-.cookie-banner {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: var(--color-gray-carbon);
-    border-top: 2px solid var(--color-pink-pitaya);
-    padding: var(--spacing-md);
-    z-index: 9999;
-    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
-    animation: slideUp 0.4s ease-out;
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateY(100%);
-    }
-
-    to {
-        transform: translateY(0);
-    }
-}
-
-.cookie-banner-content {
-    max-width: 1280px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--spacing-md);
-}
-
-.cookie-banner-text {
-    flex: 1;
-    min-width: 250px;
-}
-
-.cookie-banner-text p {
-    margin: 0;
-    font-size: 0.9rem;
-    color: var(--color-white);
-    line-height: 1.4;
-}
-
-.cookie-banner-text a {
-    color: var(--color-pink-pitaya);
-    text-decoration: underline;
-    transition: opacity var(--transition-fast);
-}
-
-.cookie-banner-text a:hover {
-    opacity: 0.8;
-}
-
-.cookie-banner-buttons {
-    display: flex;
-    gap: var(--spacing-sm);
-    flex-wrap: wrap;
-}
-
-.cookie-btn {
-    padding: 0.6rem 1.2rem;
-    border-radius: var(--radius-md);
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    border: none;
-    white-space: nowrap;
-}
-
-.cookie-btn-primary {
-    background-color: var(--color-pink-pitaya);
-    color: var(--color-white);
-}
-
-.cookie-btn-primary:hover {
-    background-color: var(--color-pink-dark);
-    transform: translateY(-2px);
-}
-
-.cookie-btn-secondary {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: var(--color-white);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.cookie-btn-secondary:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-}
-
 @media (min-width: 640px) {
     .footer-content {
         grid-template-columns: repeat(3, 1fr);
@@ -3088,26 +2995,6 @@ h6 {
     .footer-carriers {
         flex-direction: row;
         gap: var(--spacing-sm);
-    }
-
-    .cookie-banner-content {
-        align-items: flex-start;
-    }
-}
-
-@media (max-width: 640px) {
-    .cookie-banner-content {
-        flex-direction: column;
-    }
-
-    .cookie-banner-buttons {
-        width: 100%;
-        justify-content: stretch;
-    }
-
-    .cookie-btn {
-        flex: 1;
-        justify-content: center;
     }
 }
 

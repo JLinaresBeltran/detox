@@ -122,7 +122,7 @@
 
                             <!-- Mensaje de soporte -->
                             <p style="margin: 0 0 10px; color: #555555; font-size: 15px; line-height: 1.6;">
-                                Si tienes alguna pregunta sobre tu pedido, no dudes en contactarnos respondiendo a este email o escribiéndonos a <a href="mailto:<?php echo ADMIN_EMAIL; ?>" style="color: #2E7D32; text-decoration: none;"><?php echo ADMIN_EMAIL; ?></a>.
+                                Si tienes alguna pregunta sobre tu pedido, no dudes en contactarnos a este email <a href="mailto:<?php echo ADMIN_EMAIL; ?>" style="color: #2E7D32; text-decoration: none;"><?php echo ADMIN_EMAIL; ?></a>.
                             </p>
 
                             <p style="margin: 0; color: #555555; font-size: 15px; line-height: 1.6;">

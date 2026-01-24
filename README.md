@@ -23,7 +23,6 @@ Landing page profesional para el producto **Detox Sabeho** con sistema completo 
 - Botón flotante de WhatsApp
 - FAQ con acordeón expandible
 - Smooth scroll automático
-- Política de cookies granular (Esenciales, Analytics, Marketing)
 
 ### 🔧 Backend - Sistema de Pedidos
 ✅ **Gestión completa de órdenes:**

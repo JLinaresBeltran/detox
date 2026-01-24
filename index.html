@@ -48,13 +48,6 @@
     <link rel="icon" type="image/png" sizes="32x32" href="img_detox2/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="img_detox2/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="img_detox2/apple-touch-icon.png">
-    <link rel="manifest" href="manifest.json">
-
-    <!-- iOS Web App Meta Tags -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Detox Sabeho">
 
     <!-- DNS Prefetch & Preconnect -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -1219,7 +1212,6 @@
                     <ul class="footer-links">
                         <li><a href="politica-privacidad.html" target="_blank">Política de Privacidad</a></li>
                         <li><a href="terminos-condiciones.html" target="_blank">Términos y Condiciones</a></li>
-                        <li><a href="politica-cookies.html" target="_blank">Política de Cookies</a></li>
                         <li><a href="aviso-legal.html" target="_blank">Aviso Legal</a></li>
                     </ul>
                 </div>
@@ -1264,39 +1256,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- COOKIE CONSENT BANNER -->
-    <div id="cookie-banner" class="cookie-banner" style="display: none;">
-        <div class="cookie-banner-content">
-            <div class="cookie-banner-text">
-                <p>
-                    Usamos cookies para mejorar tu experiencia.
-                    <a href="politica-cookies.html" target="_blank">Política de Cookies</a>
-                </p>
-            </div>
-
-            <div id="cookie-options" class="cookie-options" style="display: none; margin: 15px 0; padding: 12px; background: rgba(255,255,255,0.1); border-radius: 4px;">
-                <label style="display: flex; align-items: center; margin: 8px 0; font-size: 0.9rem;">
-                    <input type="checkbox" id="cookie-essential" checked disabled style="margin-right: 8px;">
-                    <span><strong>Esenciales</strong> - Requeridas para el funcionamiento (siempre activas)</span>
-                </label>
-                <label style="display: flex; align-items: center; margin: 8px 0; font-size: 0.9rem;">
-                    <input type="checkbox" id="cookie-analytics" style="margin-right: 8px;">
-                    <span>Analítica - Para entender cómo usas el sitio (Google Analytics)</span>
-                </label>
-                <label style="display: flex; align-items: center; margin: 8px 0; font-size: 0.9rem;">
-                    <input type="checkbox" id="cookie-marketing" style="margin-right: 8px;">
-                    <span>Marketing - Para rastrear conversiones y mejorar campañas (Facebook Pixel)</span>
-                </label>
-            </div>
-
-            <div class="cookie-banner-buttons">
-                <button id="cookie-accept-all" class="cookie-btn cookie-btn-primary">Aceptar Todo</button>
-                <button id="cookie-reject-all" class="cookie-btn cookie-btn-secondary">Solo Esenciales</button>
-                <button id="cookie-settings" class="cookie-btn" style="background: transparent; border: 1px solid currentColor; color: inherit;">Personalizar</button>
-            </div>
-        </div>
-    </div>
 
     <!-- JavaScript Files -->
     <script src="js/countdown.js"></script>
@@ -1361,117 +1320,6 @@
         });
     </script>
     <script src="js/scroll-video.js"></script>
-
-    <!-- Cookie Consent Management -->
-    <script>
-        (function () {
-            const COOKIE_CONSENT_KEY = 'detox_sabeho_cookie_consent';
-            const cookieBanner = document.getElementById('cookie-banner');
-            const cookieOptions = document.getElementById('cookie-options');
-            const cookieAcceptAllBtn = document.getElementById('cookie-accept-all');
-            const cookieRejectAllBtn = document.getElementById('cookie-reject-all');
-            const cookieSettingsBtn = document.getElementById('cookie-settings');
-            const cookieAnalytics = document.getElementById('cookie-analytics');
-            const cookieMarketing = document.getElementById('cookie-marketing');
-
-            // Check if consent was already given
-            function checkCookieConsent() {
-                const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
-                if (!consent) {
-                    // Show banner after 2 seconds
-                    setTimeout(() => {
-                        cookieBanner.style.display = 'block';
-                    }, 2000);
-                } else {
-                    const consentData = JSON.parse(consent);
-                    // Load based on saved preferences
-                    if (consentData.analytics) {
-                        loadAnalytics();
-                    }
-                    if (consentData.marketing) {
-                        loadFacebookPixel();
-                    }
-                }
-            }
-
-            // Save consent and close
-            function saveConsent(analytics = false, marketing = false) {
-                const consentData = {
-                    essential: true,
-                    analytics: analytics,
-                    marketing: marketing,
-                    timestamp: new Date().toISOString()
-                };
-                localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(consentData));
-                cookieBanner.style.display = 'none';
-                cookieOptions.style.display = 'none';
-
-                if (analytics) loadAnalytics();
-                if (marketing) loadFacebookPixel();
-            }
-
-            // Handle Accept All
-            cookieAcceptAllBtn.addEventListener('click', () => {
-                saveConsent(true, true);
-            });
-
-            // Handle Only Essential
-            cookieRejectAllBtn.addEventListener('click', () => {
-                saveConsent(false, false);
-            });
-
-            // Handle Personalizar (show/hide options)
-            cookieSettingsBtn.addEventListener('click', () => {
-                const isHidden = cookieOptions.style.display === 'none';
-                cookieOptions.style.display = isHidden ? 'block' : 'none';
-
-                if (isHidden) {
-                    // Update checkbox states and show options
-                    cookieAnalytics.checked = false;
-                    cookieMarketing.checked = false;
-                    // Change button text
-                    cookieSettingsBtn.textContent = 'Guardar Personalización';
-                } else {
-                    // Save the custom preferences
-                    saveConsent(
-                        cookieAnalytics.checked,
-                        cookieMarketing.checked
-                    );
-                    cookieSettingsBtn.textContent = 'Personalizar';
-                }
-            });
-
-            function loadAnalytics() {
-                // Google Analytics will load if consent is given
-                if (window.gtag) {
-                    gtag('consent', 'update', {
-                        'analytics_storage': 'granted'
-                    });
-                }
-            }
-
-            function loadFacebookPixel() {
-                // Facebook Pixel will be enabled if consent is given
-                if (window.fbq) {
-                    fbq('consent', 'grant');
-                }
-            }
-
-            // Initialize on page load
-            checkCookieConsent();
-
-            // Update Google Analytics consent status
-            window.dataLayer = window.dataLayer || [];
-            function gtag() { dataLayer.push(arguments); }
-            gtag('consent', 'default', {
-                'analytics_storage': 'denied',
-                'functionality_storage': 'denied',
-                'personalization_storage': 'denied',
-                'security_storage': 'granted',
-                'ad_storage': 'denied'
-            });
-        })();
-    </script>
 </body>
 
 </html>
